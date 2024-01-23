@@ -1,0 +1,476 @@
+step 1: This code will throw an error as my_message is not defined so we modify the code.
+
+    code:
+
+        import unittest
+
+        class TestEncryption(unittest.TestCase):
+
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+Step 2: Now we do some modification to the code so that the error is not thrown
+    
+    code:
+        
+        import unittest
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"
+
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 3: Now The task is to find wether msg is a string or not
+    
+    Code:
+
+       import unittest
+
+       class TestEncryption(unittest.TestCase):
+            def setUp(self):
+               self.my_message=0                     # We get and error with 0 so we replace it by string
+
+           def test_inputExists(self):
+               self.assertIsNotNone(self.my_message)
+
+           def test_inputType(self):
+               self.assertIsInstance(self.my_message,str)
+
+       if __name__ == "__main__":
+           unittest.main()
+
+
+Step 4: The below test fails as encrypt is not defined. Hence we have to define it after seeing the error
+
+    Code:
+        import unittest
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+               self.my_message="Hi"    
+            def test_inputExists(self):
+               self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                   self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                   self.assertIsNotNone(encrypt(self.my_message))
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 5: We have defined the encrypt funcion
+
+    Code:
+        import unittest
+
+        def encrypt(message):
+            return 0
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+Step 6: Now we want to find the length of the message. There is an error as len of 0 is not equal to length of Hi
+    Code:
+        
+        import unittest
+
+        def encrypt(message):
+            return 0
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 7: Therfore we return the msg so that length is same and hence all test pass 
+        But the problem is we are not exactly encrypting anything.
+
+    Code:
+        import unittest
+
+        def encrypt(message):
+            return message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+Step 8: There is an error as we get same in both cases i.e when we check if Ip and op are same i.e not encrypted
+
+    Code:
+
+        import unittest
+
+        def encrypt(message):
+            return message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+  #WE are checking wether the first i.e input msg is revealed withing the output msg.
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+        
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 9 : # We have tested that ip and op must be different i.e they must be encrypted. 
+    
+    Code:
+        
+        import unittest
+        def encrypt(message):
+            #This basically returns a list with index values    
+            encrypted_message=[idx for idx, char in enumerate(message)]  
+            print(encrypted_message)
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+
+        if __name__ == "__main__":
+            unittest.main()
+
+# But here the data type is not same i.e it is a list not a string. Hence we need to test that as well
+
+
+
+Step 10: We Use .join() method to cover list to string. But even then we get error as conetnts are integer
+         Even after usin .join() we get TypeError: sequence item 0: expected str instance, int found.
+         So we need to convert the content of the list to str in the next step
+
+    Code:
+        import unittest
+
+        def encrypt(message):
+            encrypted_message="".join([idx for idx, char in enumerate(message)]) #This basically returns a list with index values 
+            print(encrypted_message)
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+        
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+Step 11: Convert the content of the list to str
+    
+    Code:
+        import unittest
+
+        def encrypt(message):
+            encrypted_message="".join([str(idx) for idx, char in enumerate(message)]) 
+            print(encrypted_message)
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+        
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+
+Step 12: Now we have successfully done all the tests. Now we check wether the (CeaserCypher)algorithm actually shifts the secret message one character at a time
+
+    Code:
+
+        import unittest
+        import string
+        def encrypt(message):
+            encrypted_message="".join([str(idx) for idx, char in enumerate(message)])   
+            print(encrypted_message)
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+            def test_shiftedCipher(self):
+                abc = string.ascii_letters + string.punctuation + string.digits+ " "
+                print(abc[abc.find("c")+1])    #abc.find(c) gives index of c. now we add 1 to give index of d
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+Step 13: The mistake is AssertionError: 'Ij' != '01' i.e we need to get IJ and not 01 therefore we need to change the code of encrypt
+
+    Code:
+
+        import unittest
+        import string
+        def encrypt(message):
+            encrypted_message="".join([str(idx) for idx, char in enumerate(message)]) #This basically returns a list with index values 
+            print(encrypted_message)
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+            def test_shiftedCipher(self):
+                abc = string.ascii_letters + string.punctuation + string.digits+ " "
+                encrypted_message="".join([abc[abc.find(char)+1] for idx, char in enumerate(self.my_message)])
+                print(encrypted_message)
+                self.assertEqual(encrypted_message,encrypt(self.my_message))
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 14: 
+    Code:
+
+        import unittest
+        import string
+        def encrypt(message):
+            abc = string.ascii_letters + string.punctuation + string.digits+ " "
+            encrypted_message="".join([abc[abc.find(char)+1] for idx, char in enumerate(message)])
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+            def test_shiftedCipher(self):
+                abc = string.ascii_letters + string.punctuation + string.digits+ " "
+                encrypted_message="".join([abc[abc.find(char)+1] for idx, char in enumerate(self.my_message)])
+                print(encrypted_message)
+                self.assertEqual(encrypted_message,encrypt(self.my_message))
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 15: ## For different output  ## Here we get IndexError: string index out of range  The problem is for other inputs. Once we reach the last character and we do plusone the index doesnt exist    
+    
+    Code:
+        import unittest
+        import string
+        def encrypt(message):
+            abc = string.ascii_letters + string.punctuation + string.digits+ " "
+            encrypted_message="".join([abc[abc.find(char)+1] for idx, char in enumerate(message)])
+            return encrypted_message
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi Hello"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+            def test_shiftedCipher(self):
+                abc = string.ascii_letters + string.punctuation + string.digits+ " "
+                encrypted_message="".join([abc[abc.find(char)+1] for idx, char in enumerate(self.my_message)])
+                print(encrypted_message)
+                self.assertEqual(encrypted_message,encrypt(self.my_message))
+
+        if __name__ == "__main__":
+            unittest.main()
+
+
+Step 16: Fixed the above
+
+    Code:
+        import unittest
+        import string
+        def encrypt(message):
+            abc = string.ascii_letters + string.punctuation + string.digits+ " "
+            encrypted_message="".join([abc[abc.find(char)+1] if len(abc)>(abc.find(char)+1) else abc[0] for idx, char in enumerate(message)])
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi Hello"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+            def test_shiftedCipher(self):
+                abc = string.ascii_letters + string.punctuation + string.digits+ " "
+                encrypted_message="".join([abc[abc.find(char)+1] if len(abc)>(abc.find(char)+1) else abc[0] for idx, char in enumerate(self.my_message)])
+                print(encrypted_message)
+                self.assertEqual(encrypted_message,encrypt(self.my_message))
+        if __name__ == "__main__":
+            unittest.main()
+
+
+
+Step 17 : ##Test for all datatypes
+
+    Code:
+        import unittest
+        import string
+        def encrypt(message):
+            abc = string.ascii_letters + string.punctuation + string.digits+ " "
+            encrypted_message="".join([abc[abc.find(char)+1] if len(abc)>(abc.find(char)+1) else abc[0] for idx, char in enumerate(message)])
+            return encrypted_message
+
+        class TestEncryption(unittest.TestCase):
+            def setUp(self):
+                self.my_message="Hi Hello @# 33"    
+            def test_inputExists(self):
+                self.assertIsNotNone(self.my_message)
+            def test_inputType(self):
+                self.assertIsInstance(self.my_message,str)
+            def test_funcReturnsSomething(self):
+                self.assertIsNotNone(encrypt(self.my_message))
+            def test_lenIO(self):
+                self.assertEqual(len(self.my_message),len(encrypt(self.my_message)))
+            def test_differentIO(self):
+                self.assertNotIn(self.my_message,encrypt(self.my_message))
+            def test_outputType(self):
+                self.assertIsInstance(encrypt(self.my_message),str)
+            def test_shiftedCipher(self):
+                abc = string.ascii_letters + string.punctuation + string.digits+ " "
+                encrypted_message="".join([abc[abc.find(char)+1] if len(abc)>(abc.find(char)+1) else abc[0] for idx, char in enumerate(self.my_message)])
+                print(encrypted_message)
+                self.assertEqual(encrypted_message,encrypt(self.my_message))
+
+        if __name__ == "__main__":
+            unittest.main()
