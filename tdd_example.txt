@@ -115,7 +115,8 @@ Step 6: Now we want to find the length of the message. There is an error as len 
             unittest.main()
 
 
-Step 7: Therfore we return the msg so that length is same and hence all test pass 
+Step 7: In the above step we go an error as we were returning 0. 
+        Therfore we return the msg so that length is same and hence all test pass 
         But the problem is we are not exactly encrypting anything.
 
     Code:
@@ -141,7 +142,8 @@ Step 7: Therfore we return the msg so that length is same and hence all test pas
 
 
 
-Step 8: There is an error as we get same in both cases i.e when we check if Ip and op are same i.e not encrypted
+Step 8: There is an error as we get same in both cases(same msg in input and output) 
+        i.e when we check if Ip and op are same, it is same which means not encrypted
 
     Code:
 
@@ -201,9 +203,9 @@ Step 9 : # We have tested that ip and op must be different i.e they must be encr
 
 
 
-Step 10: We Use .join() method to cover list to string. But even then we get error as conetnts are integer
+Step 10: We Use .join() method to cover list to string. But even then we get error as contents are integer
          Even after usin .join() we get TypeError: sequence item 0: expected str instance, int found.
-         So we need to convert the content of the list to str in the next step
+         So we need to convert the content of the list to str in the next step.
 
     Code:
         import unittest
@@ -267,7 +269,7 @@ Step 11: Convert the content of the list to str
 
 
 Step 12: Now we have successfully done all the tests. Now we check wether the (CeaserCypher)algorithm actually shifts the secret message one character at a time
-
+        (We try to implement ceaser cypher)
     Code:
 
         import unittest
@@ -337,7 +339,7 @@ Step 13: The mistake is AssertionError: 'Ij' != '01' i.e we need to get IJ and n
             unittest.main()
 
 
-Step 14: 
+Step 14:  Fix the above error by changing the encrypt function and implementing CeaserCypher in it
     Code:
 
         import unittest
@@ -372,7 +374,9 @@ Step 14:
             unittest.main()
 
 
-Step 15: ## For different output  ## Here we get IndexError: string index out of range  The problem is for other inputs. Once we reach the last character and we do plusone the index doesnt exist    
+Step 15: ## For different output (When we give space) 
+         ## Here we get IndexError: string index out of range  
+         The problem is for other inputs. Once we reach the last character and we do plus one the index doesnt exist    
     
     Code:
         import unittest
@@ -406,7 +410,7 @@ Step 15: ## For different output  ## Here we get IndexError: string index out of
             unittest.main()
 
 
-Step 16: Fixed the above
+Step 16: Fixed the above by using if else condition in the encrypt function
 
     Code:
         import unittest
@@ -441,7 +445,7 @@ Step 16: Fixed the above
 
 
 
-Step 17 : ##Test for all datatypes
+Step 17 : ##Test for all datatypes in the message
 
     Code:
         import unittest
