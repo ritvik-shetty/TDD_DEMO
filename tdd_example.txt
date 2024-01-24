@@ -1,6 +1,6 @@
 step 1: This code will throw an error as my_message is not defined so we modify the code.
 
-    code:
+    code :
 
         import unittest
 
@@ -12,11 +12,12 @@ step 1: This code will throw an error as my_message is not defined so we modify 
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : AttributeError: 'TestEncryption' object has no attribute 'my_message'
 
 
 Step 2: Now we do some modification to the code so that the error is not thrown
     
-    code:
+    code :
         
         import unittest
 
@@ -30,10 +31,14 @@ Step 2: Now we do some modification to the code so that the error is not thrown
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : Ran 1 test in 0.000s    OK
+
+
+
 
 Step 3: Now The task is to find wether msg is a string or not
     
-    Code:
+    Code :
 
        import unittest
 
@@ -50,10 +55,12 @@ Step 3: Now The task is to find wether msg is a string or not
        if __name__ == "__main__":
            unittest.main()
 
+    Terminal : AssertionError: 0 is not an instance of <class 'str'>
 
 Step 4: The below test fails as encrypt is not defined. Hence we have to define it after seeing the error
 
-    Code:
+    Code :
+
         import unittest
 
         class TestEncryption(unittest.TestCase):
@@ -67,11 +74,14 @@ Step 4: The below test fails as encrypt is not defined. Hence we have to define 
                    self.assertIsNotNone(encrypt(self.my_message))
         if __name__ == "__main__":
             unittest.main()
+    
+    Terminal : NameError: name 'encrypt' is not defined
 
 
 Step 5: We have defined the encrypt funcion
 
-    Code:
+    Code :
+
         import unittest
 
         def encrypt(message):
@@ -89,10 +99,13 @@ Step 5: We have defined the encrypt funcion
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : Ran 3 tests in 0.001s   OK
+
 
 
 Step 6: Now we want to find the length of the message. There is an error as len of 0 is not equal to length of Hi
-    Code:
+    
+    Code :
         
         import unittest
 
@@ -115,11 +128,15 @@ Step 6: Now we want to find the length of the message. There is an error as len 
             unittest.main()
 
 
+    Terminal : TypeError: object of type 'int' has no len()
+
+
 Step 7: In the above step we go an error as we were returning 0. 
         Therfore we return the msg so that length is same and hence all test pass 
         But the problem is we are not exactly encrypting anything.
 
-    Code:
+    Code :
+
         import unittest
 
         def encrypt(message):
@@ -140,12 +157,12 @@ Step 7: In the above step we go an error as we were returning 0.
         if __name__ == "__main__":
             unittest.main()
 
-
+    Terminal : Ran 4 tests in 0.001s   OK
 
 Step 8: There is an error as we get same in both cases(same msg in input and output) 
         i.e when we check if Ip and op are same, it is same which means not encrypted
 
-    Code:
+    Code :
 
         import unittest
 
@@ -170,10 +187,11 @@ Step 8: There is an error as we get same in both cases(same msg in input and out
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : AssertionError: 'Hi' unexpectedly found in 'Hi'
 
 Step 9 : # We have tested that ip and op must be different i.e they must be encrypted. 
     
-    Code:
+    Code :
         
         import unittest
         def encrypt(message):
@@ -201,13 +219,15 @@ Step 9 : # We have tested that ip and op must be different i.e they must be encr
 
 # But here the data type is not same i.e it is a list not a string. Hence we need to test that as well
 
+    Terminal : Ran 5 tests in 0.002s   OK
 
 
 Step 10: We Use .join() method to cover list to string. But even then we get error as contents are integer
          Even after usin .join() we get TypeError: sequence item 0: expected str instance, int found.
          So we need to convert the content of the list to str in the next step.
 
-    Code:
+    Code :
+
         import unittest
 
         def encrypt(message):
@@ -234,11 +254,13 @@ Step 10: We Use .join() method to cover list to string. But even then we get err
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : TypeError: sequence item 0: expected str instance, int found.
 
 
 Step 11: Convert the content of the list to str
     
-    Code:
+    Code :
+
         import unittest
 
         def encrypt(message):
@@ -265,12 +287,15 @@ Step 11: Convert the content of the list to str
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : Ran 6 tests in 0.002s  OK
+
 
 
 
 Step 12: Now we have successfully done all the tests. Now we check wether the (CeaserCypher)algorithm actually shifts the secret message one character at a time
         (We try to implement ceaser cypher)
-    Code:
+    
+    Code :
 
         import unittest
         import string
@@ -301,11 +326,12 @@ Step 12: Now we have successfully done all the tests. Now we check wether the (C
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : Ran 7 tests in 0.002s  OK
 
 
 Step 13: The mistake is AssertionError: 'Ij' != '01' i.e we need to get IJ and not 01 therefore we need to change the code of encrypt
 
-    Code:
+    Code :
 
         import unittest
         import string
@@ -338,9 +364,12 @@ Step 13: The mistake is AssertionError: 'Ij' != '01' i.e we need to get IJ and n
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : AssertionError: 'Ij' != '01'
+
 
 Step 14:  Fix the above error by changing the encrypt function and implementing CeaserCypher in it
-    Code:
+    
+    Code :
 
         import unittest
         import string
@@ -373,12 +402,13 @@ Step 14:  Fix the above error by changing the encrypt function and implementing 
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : Ran 7 tests in 0.001s  OK
 
 Step 15: ## For different output (When we give space) 
          ## Here we get IndexError: string index out of range  
          The problem is for other inputs. Once we reach the last character and we do plus one the index doesnt exist    
     
-    Code:
+    Code :
         import unittest
         import string
         def encrypt(message):
@@ -409,10 +439,12 @@ Step 15: ## For different output (When we give space)
         if __name__ == "__main__":
             unittest.main()
 
+    Terminal : IndexError: string index out of range 
+
 
 Step 16: Fixed the above by using if else condition in the encrypt function
 
-    Code:
+    Code :
         import unittest
         import string
         def encrypt(message):
@@ -443,11 +475,11 @@ Step 16: Fixed the above by using if else condition in the encrypt function
         if __name__ == "__main__":
             unittest.main()
 
-
+    Terminal :  Ran 7 tests in 0.002s  OK
 
 Step 17 : ##Test for all datatypes in the message
 
-    Code:
+    Code :
         import unittest
         import string
         def encrypt(message):
@@ -478,3 +510,5 @@ Step 17 : ##Test for all datatypes in the message
 
         if __name__ == "__main__":
             unittest.main()
+
+    Terminal :  Ran 7 tests in 0.002s  OK        
